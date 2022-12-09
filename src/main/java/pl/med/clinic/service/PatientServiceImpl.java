@@ -18,6 +18,16 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public PatientDtoResponse get(Long id) {
         PatientEntity patientById = patientRepository.getById(id);
-        return new PatientDtoResponse(patientById.getId(), patientById.getName());
+        return new PatientDtoResponse(patientById.getId(),
+                                        patientById.getFirstName(),
+                                        patientById.getLastName(),
+                                        patientById.getPesel(),
+                                        patientById.getGender());
+    }
+
+    @Override
+    public PatientEntity saveToDatabase(PatientEntity newPatient) {
+        patientRepository.save(newPatient);
+        return newPatient;
     }
 }

@@ -8,6 +8,8 @@ import lombok.Getter;
 public class PatientDtoResponse {
 
     private Long id;
-    private String name;
-
+    private String firstName;
+    private String lastName;
+    private String pesel;
+    private String gender;
 }

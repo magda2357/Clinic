@@ -1,11 +1,9 @@
 package pl.med.clinic.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.med.clinic.dto.PatientDtoResponse;
+import pl.med.clinic.entity.PatientEntity;
 import pl.med.clinic.service.PatientService;
 
 @RestController
@@ -18,5 +16,16 @@ public class PatientController {
     @GetMapping("/{id}")
     public PatientDtoResponse get(@PathVariable Long id) {
         return patientService.get(id);
+    }
+
+//    @GetMapping("/")
+//    public List<PatientEntity> getAll() {
+//        return patientService.getAll();
+//    }
+
+    @PostMapping("")
+    public int add(@RequestBody PatientEntity newPatient){
+        patientService.saveToDatabase(newPatient);
+        return 1;
     }
 }
