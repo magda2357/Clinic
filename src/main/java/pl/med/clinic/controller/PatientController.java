@@ -6,6 +6,8 @@ import pl.med.clinic.dto.PatientDtoResponse;
 import pl.med.clinic.entity.PatientEntity;
 import pl.med.clinic.service.PatientService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/patient")
 @RequiredArgsConstructor
@@ -18,14 +20,26 @@ public class PatientController {
         return patientService.get(id);
     }
 
-//    @GetMapping("/")
-//    public List<PatientEntity> getAll() {
-//        return patientService.getAll();
-//    }
+    @GetMapping("/")
+    public List<PatientDtoResponse> getAll() {
+        return patientService.getAll();
+    }
 
-    @PostMapping("")
-    public int add(@RequestBody PatientEntity newPatient){
-        patientService.saveToDatabase(newPatient);
+    @PostMapping("/")
+    public int addAll(@RequestBody List<PatientEntity> newPatients) {
+        patientService.savePatients(newPatients);
+        return 1;
+    }
+
+    @PutMapping("/{id}")
+    public int update(@PathVariable("id") Long id, @RequestBody PatientEntity updatedPatient) {
+        patientService.updatePatient(id, updatedPatient);
+        return 1;
+    }
+
+    @DeleteMapping("/{id}")
+    public int delete(@PathVariable("id") Long id) {
+        patientService.deletePatientById(id);
         return 1;
     }
 }
