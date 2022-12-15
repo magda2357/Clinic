@@ -32,7 +32,7 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable Long id, @RequestBody PatientEntity updatedPatient) {
+    public void update(@PathVariable Long id, @RequestBody PatientDtoRequest updatedPatient) {
         patientService.updatePatient(id, updatedPatient);
     }
 

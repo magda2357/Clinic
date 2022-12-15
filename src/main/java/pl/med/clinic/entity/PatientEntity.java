@@ -22,10 +22,10 @@ public class PatientEntity {
     private String pesel;
     private String gender;
 
-    public PatientEntity(PatientDtoRequest patient) {
-        this.firstName = patient.getFirstName();
-        this.lastName = patient.getLastName();
-        this.pesel = patient.getPesel();
-        this.gender = patient.getGender();
+    public PatientEntity(String firstName, String lastName, String pesel, String gender) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.pesel = pesel;
+        this.gender = gender;
     }
 }

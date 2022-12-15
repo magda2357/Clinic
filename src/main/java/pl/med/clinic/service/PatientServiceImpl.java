@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static org.springframework.beans.BeanUtils.*;
 
 @Service
 @Transactional
@@ -22,14 +23,11 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientDtoResponse get(Long id) {
-
-        PatientEntity byId = patientRepository.getOrElseThrow(id);
-        return new PatientDtoResponse(byId);
+        return new PatientDtoResponse(patientRepository.getOrThrow(id));
     }
 
     @Override
     public List<PatientDtoResponse> getAll() {
-
         return patientRepository.findAll().stream()
                 .map(PatientDtoResponse::new)
                 .collect(toList());
@@ -37,23 +35,21 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public void savePatient(PatientDtoRequest newPatient) {
-
-        PatientEntity patientEntity =new PatientEntity(newPatient);
+        PatientEntity patientEntity = new PatientEntity();
+        copyProperties(newPatient, patientEntity);
         patientRepository.save(patientEntity);
     }
 
     @Override
-    public PatientDtoResponse updatePatient(Long id, PatientEntity updatedPatient) {
-
-        PatientEntity patientById = patientRepository.getOrElseThrow(id);
-        BeanUtils.copyProperties(updatedPatient, patientById);
+    public PatientDtoResponse updatePatient(Long id, PatientDtoRequest updatedPatient) {
+        PatientEntity patientById = patientRepository.getOrThrow(id);
+        copyProperties(updatedPatient, patientById);
         PatientEntity updatedEntity = patientRepository.save(patientById);
         return new PatientDtoResponse(updatedEntity);
     }
 
     @Override
     public void deletePatientById(Long id) {
-
         patientRepository.deleteById(id);
     }
 }
