@@ -2,10 +2,9 @@ package pl.med.clinic.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
+import pl.med.clinic.entity.PatientEntity;
 
 @Getter
-@Setter
 @AllArgsConstructor
 public class PatientDtoResponse {
 
@@ -14,4 +13,12 @@ public class PatientDtoResponse {
     private String lastName;
     private String pesel;
     private String gender;
+
+    public PatientDtoResponse(PatientEntity patient) {
+        this.id = patient.getId();
+        this.firstName = patient.getFirstName();
+        this.lastName = patient.getLastName();
+        this.pesel = patient.getPesel();
+        this.gender = patient.getGender();
+    }
 }

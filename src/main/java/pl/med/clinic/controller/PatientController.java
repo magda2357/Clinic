@@ -2,6 +2,7 @@ package pl.med.clinic.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import pl.med.clinic.dto.PatientDtoRequest;
 import pl.med.clinic.dto.PatientDtoResponse;
 import pl.med.clinic.entity.PatientEntity;
 import pl.med.clinic.service.PatientService;
@@ -20,26 +21,23 @@ public class PatientController {
         return patientService.get(id);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<PatientDtoResponse> getAll() {
         return patientService.getAll();
     }
 
-    @PostMapping("/")
-    public int addAll(@RequestBody List<PatientEntity> newPatients) {
-        patientService.savePatients(newPatients);
-        return 1;
+    @PostMapping
+    public void add(@RequestBody PatientDtoRequest newPatient) {
+        patientService.savePatient(newPatient);
     }
 
     @PutMapping("/{id}")
-    public int update(@PathVariable("id") Long id, @RequestBody PatientEntity updatedPatient) {
+    public void update(@PathVariable Long id, @RequestBody PatientEntity updatedPatient) {
         patientService.updatePatient(id, updatedPatient);
-        return 1;
     }
 
     @DeleteMapping("/{id}")
-    public int delete(@PathVariable("id") Long id) {
+    public void delete(@PathVariable Long id) {
         patientService.deletePatientById(id);
-        return 1;
     }
 }

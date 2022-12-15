@@ -3,6 +3,7 @@ package pl.med.clinic.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.med.clinic.dto.PatientDtoRequest;
 
 import javax.persistence.*;
 
@@ -21,4 +22,10 @@ public class PatientEntity {
     private String pesel;
     private String gender;
 
+    public PatientEntity(PatientDtoRequest patient) {
+        this.firstName = patient.getFirstName();
+        this.lastName = patient.getLastName();
+        this.pesel = patient.getPesel();
+        this.gender = patient.getGender();
+    }
 }

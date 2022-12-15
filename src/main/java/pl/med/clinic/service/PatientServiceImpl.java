@@ -1,14 +1,17 @@
 package pl.med.clinic.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import pl.med.clinic.dto.PatientDtoRequest;
 import pl.med.clinic.dto.PatientDtoResponse;
 import pl.med.clinic.entity.PatientEntity;
 import pl.med.clinic.repository.PatientRepository;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 @Transactional
@@ -19,51 +22,38 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientDtoResponse get(Long id) {
-        PatientEntity patientById = patientRepository.getById(id);
-        return new PatientDtoResponse(patientById.getId(),
-                                        patientById.getFirstName(),
-                                        patientById.getLastName(),
-                                        patientById.getPesel(),
-                                        patientById.getGender());
+
+        PatientEntity byId = patientRepository.getOrElseThrow(id);
+        return new PatientDtoResponse(byId);
     }
 
     @Override
     public List<PatientDtoResponse> getAll() {
 
-        List<PatientEntity> patients = new ArrayList<>(patientRepository.findAll());
-        List<PatientDtoResponse> patientsDto=new ArrayList<>();
-
-        patients.forEach(patient->patientsDto.add(new PatientDtoResponse(patient.getId(),
-                patient.getFirstName(),
-                patient.getLastName(),
-                patient.getPesel(),
-                patient.getGender())));
-
-        return patientsDto;
-    }
-
-
-    @Override
-    public int savePatients(List<PatientEntity> newPatients) {
-        patientRepository.saveAll(newPatients);
-        return 1;
+        return patientRepository.findAll().stream()
+                .map(PatientDtoResponse::new)
+                .collect(toList());
     }
 
     @Override
-    public int updatePatient(Long id, PatientEntity updatedPatient) {
+    public void savePatient(PatientDtoRequest newPatient) {
 
-        PatientEntity patientById = patientRepository.getById(id);
-
-        patientById.setFirstName(updatedPatient.getFirstName());
-        patientById.setLastName(updatedPatient.getLastName());
-
-        patientRepository.save(patientById);
-        return 1;
+        PatientEntity patientEntity =new PatientEntity(newPatient);
+        patientRepository.save(patientEntity);
     }
 
     @Override
-    public int deletePatientById(Long id){
+    public PatientDtoResponse updatePatient(Long id, PatientEntity updatedPatient) {
+
+        PatientEntity patientById = patientRepository.getOrElseThrow(id);
+        BeanUtils.copyProperties(updatedPatient, patientById);
+        PatientEntity updatedEntity = patientRepository.save(patientById);
+        return new PatientDtoResponse(updatedEntity);
+    }
+
+    @Override
+    public void deletePatientById(Long id) {
+
         patientRepository.deleteById(id);
-        return 1;
     }
 }
