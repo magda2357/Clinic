@@ -6,6 +6,7 @@ import lombok.Setter;
 import pl.med.clinic.dto.PatientDtoRequest;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "patient")
@@ -20,12 +21,14 @@ public class PatientEntity {
     private String firstName;
     private String lastName;
     private String pesel;
-    private String gender;
+    private Gender gender;
+    private LocalDate dateOfBirth;
 
-    public PatientEntity(String firstName, String lastName, String pesel, String gender) {
+    public PatientEntity(String firstName, String lastName, String pesel, Gender gender, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pesel = pesel;
         this.gender = gender;
+        this.dateOfBirth=dateOfBirth;
     }
 }

@@ -3,6 +3,7 @@ package pl.med.clinic.service;
 import pl.med.clinic.dto.PatientDtoRequest;
 import pl.med.clinic.dto.PatientDtoResponse;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface PatientService {

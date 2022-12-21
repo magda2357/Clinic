@@ -9,6 +9,7 @@ import pl.med.clinic.entity.PatientEntity;
 import pl.med.clinic.repository.PatientRepository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -51,5 +52,9 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void deletePatientById(Long id) {
         patientRepository.deleteById(id);
+    }
+
+    public LocalDate getAge(Long id){
+        return patientRepository.getOrThrow(id).getDateOfBirth();
     }
 }

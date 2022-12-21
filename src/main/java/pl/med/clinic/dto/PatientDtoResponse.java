@@ -2,7 +2,10 @@ package pl.med.clinic.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import pl.med.clinic.entity.Gender;
 import pl.med.clinic.entity.PatientEntity;
+
+import java.time.LocalDate;
 
 @Getter
 @AllArgsConstructor
@@ -12,7 +15,8 @@ public class PatientDtoResponse {
     private String firstName;
     private String lastName;
     private String pesel;
-    private String gender;
+    private Gender gender;
+    private LocalDate dateOfBirth;
 
     public PatientDtoResponse(PatientEntity patient) {
         this.id = patient.getId();
@@ -20,5 +24,6 @@ public class PatientDtoResponse {
         this.lastName = patient.getLastName();
         this.pesel = patient.getPesel();
         this.gender = patient.getGender();
+        this.dateOfBirth=patient.getDateOfBirth();
     }
 }
