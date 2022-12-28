@@ -2,8 +2,6 @@ package pl.med.clinic.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import pl.med.clinic.dto.PatientDtoRequest;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,7 +10,6 @@ import java.time.LocalDate;
 @Table(name = "patient")
 @NoArgsConstructor
 @Getter
-@Setter
 public class PatientEntity {
 
     @Id
@@ -29,6 +26,6 @@ public class PatientEntity {
         this.lastName = lastName;
         this.pesel = pesel;
         this.gender = gender;
-        this.dateOfBirth=dateOfBirth;
+        this.dateOfBirth = dateOfBirth;
     }
 }

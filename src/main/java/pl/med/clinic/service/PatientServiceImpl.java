@@ -1,7 +1,6 @@
 package pl.med.clinic.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import pl.med.clinic.dto.PatientDtoRequest;
 import pl.med.clinic.dto.PatientDtoResponse;
@@ -9,11 +8,10 @@ import pl.med.clinic.entity.PatientEntity;
 import pl.med.clinic.repository.PatientRepository;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
-import static org.springframework.beans.BeanUtils.*;
+import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Service
 @Transactional
@@ -52,9 +50,5 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void deletePatientById(Long id) {
         patientRepository.deleteById(id);
-    }
-
-    public LocalDate getAge(Long id){
-        return patientRepository.getOrThrow(id).getDateOfBirth();
     }
 }

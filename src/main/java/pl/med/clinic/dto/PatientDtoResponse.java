@@ -1,5 +1,6 @@
 package pl.med.clinic.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import pl.med.clinic.entity.Gender;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class PatientDtoResponse {
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Long id;
     private String firstName;
     private String lastName;
@@ -24,6 +26,6 @@ public class PatientDtoResponse {
         this.lastName = patient.getLastName();
         this.pesel = patient.getPesel();
         this.gender = patient.getGender();
-        this.dateOfBirth=patient.getDateOfBirth();
+        this.dateOfBirth = patient.getDateOfBirth();
     }
 }
