@@ -30,4 +30,5 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         body.put("path", req.getRequestURI());
         return new ResponseEntity<>(body, status);
     }
+    
 }

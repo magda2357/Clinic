@@ -3,12 +3,10 @@ package pl.med.clinic.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
+import static javax.persistence.EnumType.*;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -23,6 +21,8 @@ public class PatientEntity {
     private String firstName;
     private String lastName;
     private String pesel;
+
+    @Enumerated(STRING)
     private Gender gender;
     private LocalDate dateOfBirth;
 
