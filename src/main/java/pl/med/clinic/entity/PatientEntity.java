@@ -3,8 +3,13 @@ package pl.med.clinic.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDate;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "patient")
@@ -13,7 +18,7 @@ import java.time.LocalDate;
 public class PatientEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
