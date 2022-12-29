@@ -9,7 +9,6 @@ import pl.med.clinic.entity.PatientEntity;
 import java.time.LocalDate;
 
 @Getter
-@AllArgsConstructor
 public class PatientDtoResponse {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
