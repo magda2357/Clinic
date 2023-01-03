@@ -11,7 +11,7 @@ public interface PatientService {
 
     List<PatientDtoResponse> getAll();
 
-    void savePatient(PatientDtoRequest newPatient);
+    PatientDtoResponse savePatient(PatientDtoRequest newPatient);
 
     PatientDtoResponse updatePatient(Long id, PatientDtoRequest newPatient);
 

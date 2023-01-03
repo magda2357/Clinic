@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.med.clinic.dto.PatientDtoRequest;
 import pl.med.clinic.dto.PatientDtoResponse;
-import pl.med.clinic.entity.PatientEntity;
 import pl.med.clinic.service.PatientService;
 
 import java.util.List;

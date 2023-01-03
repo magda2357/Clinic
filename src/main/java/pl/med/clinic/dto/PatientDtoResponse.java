@@ -12,12 +12,12 @@ import java.time.LocalDate;
 public class PatientDtoResponse {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private String pesel;
-    private Gender gender;
-    private LocalDate dateOfBirth;
+    private final Long id;
+    private final String firstName;
+    private final String lastName;
+    private final String pesel;
+    private final Gender gender;
+    private final LocalDate dateOfBirth;
 
     public PatientDtoResponse(PatientEntity patient) {
         this.id = patient.getId();

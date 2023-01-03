@@ -2,19 +2,21 @@ package pl.med.clinic.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.EnumType.*;
+import static javax.persistence.EnumType.STRING;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "patient")
 @NoArgsConstructor
 @Getter
+@Setter
 public class PatientEntity {
 
     @Id
@@ -34,13 +36,16 @@ public class PatientEntity {
     )
     private List<VisitEntity> visits;
 
-    public PatientEntity(String firstName, String lastName, String pesel, Gender gender, LocalDate dateOfBirth, List<VisitEntity> visits) {
+    public PatientEntity(String firstName,
+                         String lastName,
+                         String pesel,
+                         Gender gender,
+                         LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pesel = pesel;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
-        this.visits = visits;
     }
 
 }
