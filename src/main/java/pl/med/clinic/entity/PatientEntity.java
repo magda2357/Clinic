@@ -1,4 +1,4 @@
-package pl.med.clinic.entity;
+ package pl.med.clinic.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
