@@ -1,7 +1,6 @@
 package pl.med.clinic.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import pl.med.clinic.dto.PatientDtoRequest;
 import pl.med.clinic.dto.PatientDtoResponse;
@@ -12,7 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
-import static org.springframework.beans.BeanUtils.*;
+import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Service
 @Transactional
@@ -34,10 +33,10 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public void savePatient(PatientDtoRequest newPatient) {
-        PatientEntity patientEntity = new PatientEntity();
-        copyProperties(newPatient, patientEntity);
-        patientRepository.save(patientEntity);
+    public PatientDtoResponse savePatient(PatientDtoRequest newPatient) {
+        PatientEntity patientEntity = mapToEntity(newPatient);
+        PatientEntity save = patientRepository.save(patientEntity);
+        return new PatientDtoResponse(save);
     }
 
     @Override
@@ -51,5 +50,15 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void deletePatientById(Long id) {
         patientRepository.deleteById(id);
+    }
+
+    private PatientEntity mapToEntity(PatientDtoRequest dto) {
+        return new PatientEntity(
+                dto.getFirstName(),
+                dto.getLastName(),
+                dto.getPesel(),
+                dto.getGender(),
+                dto.getDateOfBirth()
+        );
     }
 }
