@@ -10,7 +10,7 @@ public interface VisitService {
 
     VisitDto getVisit(Long visitId);
 
-    VisitDto createVisit(VisitDtoRequest newVisit);
+    VisitDto createVisit(VisitDtoRequest newVisit, Long patientId);
 
-    void cancelVisit(Long visitId);
+    void cancelVisit(Long visitId, Long patientId);
 }

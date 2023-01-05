@@ -8,30 +8,30 @@ import pl.med.clinic.dto.VisitsDtoResponse;
 import pl.med.clinic.service.VisitService;
 
 @RestController
-@RequestMapping("/patient")
+@RequestMapping("/patient/{patientId}/visit")
 @RequiredArgsConstructor
 public class VisitController {
 
     private final VisitService visitService;
 
-    @GetMapping("/{patientId}/visit")
+    @GetMapping
     public VisitsDtoResponse getPatientsVisits(@PathVariable Long patientId) {
         return visitService.getPatientsVisits(patientId);
     }
 
-    @GetMapping("/visit/{visitId}")
+    @GetMapping("/{visitId}")
     public VisitDto getVisit(@PathVariable Long visitId) {
         return visitService.getVisit(visitId);
     }
 
-    @PostMapping("/visit")
-    public void createVisit(@RequestBody VisitDtoRequest newVisit) {
-        visitService.createVisit(newVisit);
+    @PostMapping
+    public void createVisit(@RequestBody VisitDtoRequest newVisit, Long patientId) {
+        visitService.createVisit(newVisit, patientId);
     }
 
-    @DeleteMapping("/visit/{visitId}")
-    public void cancelVisit(@PathVariable Long visitId) {
-        visitService.cancelVisit(visitId);
+    @DeleteMapping("/{visitId}")
+    public void cancelVisit(@PathVariable Long visitId, Long patientId) {
+        visitService.cancelVisit(visitId, patientId);
     }
 
 

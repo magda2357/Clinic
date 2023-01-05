@@ -1,0 +1,2 @@
+ALTER TABLE visit
+    ALTER COLUMN description TYPE VARCHAR(500);

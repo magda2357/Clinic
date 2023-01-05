@@ -32,15 +32,17 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public VisitDto createVisit(VisitDtoRequest newVisit) {
+    public VisitDto createVisit(VisitDtoRequest newVisit, Long patientId) {
         VisitEntity visitEntity = mapToEntity(newVisit);
-        VisitEntity save = visitRepository.save(visitEntity);
-        return new VisitDto(save);
+        visitEntity.setPatient(patientRepository.getOrThrow(patientId));
+        return new VisitDto(visitRepository.save(visitEntity));
     }
 
     @Override
-    public void cancelVisit(Long visitId) {
-        visitRepository.deleteById(visitId);
+    public void cancelVisit(Long visitId, Long patientId) {
+        if (visitRepository.getOrThrow(visitId).getPatient().getId() == patientId) {
+            visitRepository.deleteById(visitId);
+        }
     }
 
     private VisitEntity mapToEntity(VisitDtoRequest dto) {
@@ -48,8 +50,6 @@ public class VisitServiceImpl implements VisitService {
                 dto.getVisitDateTime(),
                 dto.getPaid(),
                 dto.getDescription(),
-                dto.getPayment(),
-                patientRepository.getOrThrow(dto.getPatientId())
-        );
+                dto.getPayment());
     }
 }

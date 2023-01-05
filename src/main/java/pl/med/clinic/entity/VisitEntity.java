@@ -32,13 +32,11 @@ public class VisitEntity {
     public VisitEntity(LocalDateTime visitDateTime,
                        Paid paid,
                        String description,
-                       Payment payment,
-                       PatientEntity patient) {
+                       Payment payment) {
         this.visitDateTime = visitDateTime;
         this.paid = paid;
         this.description = description;
         this.payment = payment;
-        this.patient = patient;
     }
 
     public void setPatient(PatientEntity patient) {

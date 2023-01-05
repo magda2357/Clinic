@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @Getter
 public class VisitDto {
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private final Long id;
     private final LocalDateTime visitDateTime;
     private final Paid paid;

@@ -15,5 +15,4 @@ public class VisitDtoRequest {
     private Paid paid;
     private String description;
     private Payment payment;
-    private Long patientId;
 }
