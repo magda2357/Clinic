@@ -20,8 +20,8 @@ public class VisitController {
     }
 
     @GetMapping("/{visitId}")
-    public VisitDto getVisit(@PathVariable Long visitId) {
-        return visitService.getVisit(visitId);
+    public void getVisit(@PathVariable Long visitId) {
+        visitService.getVisit(visitId);
     }
 
     @PostMapping

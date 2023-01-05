@@ -5,12 +5,14 @@ import org.springframework.stereotype.Service;
 import pl.med.clinic.dto.VisitDto;
 import pl.med.clinic.dto.VisitDtoRequest;
 import pl.med.clinic.dto.VisitsDtoResponse;
+import pl.med.clinic.entity.PatientEntity;
 import pl.med.clinic.entity.VisitEntity;
 import pl.med.clinic.repository.PatientRepository;
 import pl.med.clinic.repository.VisitRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -27,20 +29,20 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public VisitDto getVisit(Long visitId) {
-        return new VisitDto(visitRepository.getOrThrow(visitId));
+    public void getVisit(Long visitId) {
+        visitRepository.getOrThrow(visitId);
     }
 
     @Override
-    public VisitDto createVisit(VisitDtoRequest newVisit, Long patientId) {
+    public void createVisit(VisitDtoRequest newVisit, Long patientId) {
         VisitEntity visitEntity = mapToEntity(newVisit);
         visitEntity.setPatient(patientRepository.getOrThrow(patientId));
-        return new VisitDto(visitRepository.save(visitEntity));
+        visitRepository.save(visitEntity);
     }
 
     @Override
     public void cancelVisit(Long visitId, Long patientId) {
-        if (visitRepository.getOrThrow(visitId).getPatient().getId() == patientId) {
+        if (Objects.equals(visitRepository.getOrThrow(visitId).getPatient().getId(), patientId)) {
             visitRepository.deleteById(visitId);
         }
     }

@@ -8,9 +8,9 @@ public interface VisitService {
 
     VisitsDtoResponse getPatientsVisits(Long patientId);
 
-    VisitDto getVisit(Long visitId);
+    void getVisit(Long visitId);
 
-    VisitDto createVisit(VisitDtoRequest newVisit, Long patientId);
+    void createVisit(VisitDtoRequest newVisit, Long patientId);
 
     void cancelVisit(Long visitId, Long patientId);
 }

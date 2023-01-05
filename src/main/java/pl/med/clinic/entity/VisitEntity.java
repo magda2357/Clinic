@@ -19,9 +19,11 @@ public class VisitEntity {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private LocalDateTime visitDateTime;
+
     @Enumerated(STRING)
     private Paid paid;
     private String description;
+
     @Enumerated(STRING)
     private Payment payment;
 
