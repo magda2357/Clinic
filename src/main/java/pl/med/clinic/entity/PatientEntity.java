@@ -47,5 +47,4 @@ public class PatientEntity {
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
     }
-
 }

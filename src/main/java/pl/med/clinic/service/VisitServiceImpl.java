@@ -2,10 +2,8 @@ package pl.med.clinic.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.med.clinic.dto.VisitDto;
 import pl.med.clinic.dto.VisitDtoRequest;
 import pl.med.clinic.dto.VisitsDtoResponse;
-import pl.med.clinic.entity.PatientEntity;
 import pl.med.clinic.entity.VisitEntity;
 import pl.med.clinic.repository.PatientRepository;
 import pl.med.clinic.repository.VisitRepository;
@@ -36,6 +34,7 @@ public class VisitServiceImpl implements VisitService {
     @Override
     public void createVisit(VisitDtoRequest newVisit, Long patientId) {
         VisitEntity visitEntity = mapToEntity(newVisit);
+        addVisitToPatient(visitEntity, patientId);
         visitEntity.setPatient(patientRepository.getOrThrow(patientId));
         visitRepository.save(visitEntity);
     }
@@ -44,6 +43,7 @@ public class VisitServiceImpl implements VisitService {
     public void cancelVisit(Long visitId, Long patientId) {
         if (Objects.equals(visitRepository.getOrThrow(visitId).getPatient().getId(), patientId)) {
             visitRepository.deleteById(visitId);
+            deleteVisitFromPatient(visitId, patientId);
         }
     }
 
@@ -53,5 +53,13 @@ public class VisitServiceImpl implements VisitService {
                 dto.getPaid(),
                 dto.getDescription(),
                 dto.getPayment());
+    }
+
+    private void addVisitToPatient(VisitEntity visit, Long patientId) {
+        patientRepository.getOrThrow(patientId).getVisits().add(visit);
+    }
+
+    private void deleteVisitFromPatient(Long visitId, Long patientId) {
+        patientRepository.getOrThrow(patientId).getVisits().removeIf(n -> Objects.equals(n.getId(), visitId));
     }
 }
