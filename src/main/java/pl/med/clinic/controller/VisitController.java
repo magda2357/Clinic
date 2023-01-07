@@ -2,10 +2,12 @@ package pl.med.clinic.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import pl.med.clinic.dto.VisitDto;
 import pl.med.clinic.dto.VisitDtoRequest;
+import pl.med.clinic.dto.VisitDtoResponse;
 import pl.med.clinic.dto.VisitsDtoResponse;
 import pl.med.clinic.service.VisitService;
+
+import static org.springframework.http.HttpStatus.ACCEPTED;
 
 @RestController
 @RequestMapping("/patient/{patientId}/visit")
@@ -20,19 +22,19 @@ public class VisitController {
     }
 
     @GetMapping("/{visitId}")
-    public void getVisit(@PathVariable Long visitId) {
-        visitService.getVisit(visitId);
+    public VisitDtoResponse get(@PathVariable Long patientId, @PathVariable Long visitId) {
+        return visitService.get(patientId, visitId);
     }
 
     @PostMapping
-    public void createVisit(@RequestBody VisitDtoRequest newVisit, Long patientId) {
-        visitService.createVisit(newVisit, patientId);
+    public VisitDtoResponse create(@PathVariable Long patientId, @RequestBody VisitDtoRequest newVisit) {
+        return visitService.create(patientId, newVisit);
     }
 
     @DeleteMapping("/{visitId}")
-    public void cancelVisit(@PathVariable Long visitId, Long patientId) {
-        visitService.cancelVisit(visitId, patientId);
+    @ResponseStatus(value = ACCEPTED, reason = "Visit has been deleted")
+    public void cancel(@PathVariable Long patientId, @PathVariable Long visitId) {
+        visitService.cancel(patientId, visitId);
     }
-
 
 }

@@ -1,6 +1,5 @@
 package pl.med.clinic.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import pl.med.clinic.entity.Paid;
 import pl.med.clinic.entity.Payment;
@@ -9,7 +8,7 @@ import pl.med.clinic.entity.VisitEntity;
 import java.time.LocalDateTime;
 
 @Getter
-public class VisitDto {
+public class VisitDtoResponse {
 
     private final Long id;
     private final LocalDateTime visitDateTime;
@@ -17,7 +16,7 @@ public class VisitDto {
     private final String description;
     private final Payment payment;
 
-    public VisitDto(VisitEntity entity) {
+    public VisitDtoResponse(VisitEntity entity) {
         this.id = entity.getId();
         this.visitDateTime = entity.getVisitDateTime();
         this.paid = entity.getPaid();

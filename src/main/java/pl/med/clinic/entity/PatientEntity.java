@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.CascadeType.ALL;
@@ -34,7 +35,7 @@ public class PatientEntity {
             mappedBy = "patient",
             cascade = ALL
     )
-    private List<VisitEntity> visits;
+    private List<VisitEntity> visits = new ArrayList<>();
 
     public PatientEntity(String firstName,
                          String lastName,
@@ -47,4 +48,13 @@ public class PatientEntity {
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
     }
+
+    public void addVisit(VisitEntity visitEntity) {
+        this.getVisits().add(visitEntity);
+    }
+
+    public void deleteVisit(VisitEntity visit) {
+        this.getVisits().remove(visit);
+    }
+
 }

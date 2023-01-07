@@ -1,6 +1,6 @@
 package pl.med.clinic.service;
 
-import pl.med.clinic.dto.VisitDto;
+import pl.med.clinic.dto.VisitDtoResponse;
 import pl.med.clinic.dto.VisitDtoRequest;
 import pl.med.clinic.dto.VisitsDtoResponse;
 
@@ -8,9 +8,9 @@ public interface VisitService {
 
     VisitsDtoResponse getPatientsVisits(Long patientId);
 
-    void getVisit(Long visitId);
+    VisitDtoResponse get(Long patientId, Long visitId);
 
-    void createVisit(VisitDtoRequest newVisit, Long patientId);
+    VisitDtoResponse create(Long patientId, VisitDtoRequest newVisit);
 
-    void cancelVisit(Long visitId, Long patientId);
+    void cancel(Long visitId, Long patientId);
 }

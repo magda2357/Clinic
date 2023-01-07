@@ -3,14 +3,16 @@ package pl.med.clinic.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.med.clinic.dto.VisitDtoRequest;
+import pl.med.clinic.dto.VisitDtoResponse;
 import pl.med.clinic.dto.VisitsDtoResponse;
+import pl.med.clinic.entity.PatientEntity;
 import pl.med.clinic.entity.VisitEntity;
+import pl.med.clinic.exception.ForbiddenException;
 import pl.med.clinic.repository.PatientRepository;
 import pl.med.clinic.repository.VisitRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @Transactional
@@ -27,24 +29,38 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public void getVisit(Long visitId) {
-        visitRepository.getOrThrow(visitId);
-    }
-
-    @Override
-    public void createVisit(VisitDtoRequest newVisit, Long patientId) {
-        VisitEntity visitEntity = mapToEntity(newVisit);
-        addVisitToPatient(visitEntity, patientId);
-        visitEntity.setPatient(patientRepository.getOrThrow(patientId));
-        visitRepository.save(visitEntity);
-    }
-
-    @Override
-    public void cancelVisit(Long visitId, Long patientId) {
-        if (Objects.equals(visitRepository.getOrThrow(visitId).getPatient().getId(), patientId)) {
-            visitRepository.deleteById(visitId);
-            deleteVisitFromPatient(visitId, patientId);
+    public VisitDtoResponse get(Long patientId, Long visitId) {
+        PatientEntity patient = patientRepository.getOrThrow(patientId);
+        VisitEntity visit = visitRepository.getOrThrow(visitId);
+        if (!patient.getVisits().contains(visit)) {
+            throw new ForbiddenException("Visit by id " + visitId + " not available for patient by id " + patientId);
         }
+        return new VisitDtoResponse(visit);
+    }
+
+    @Override
+    public VisitDtoResponse create(Long patientId, VisitDtoRequest newVisit) {
+        PatientEntity patientEntity = patientRepository.getOrThrow(patientId);
+        VisitEntity visitEntity = mapToEntity(newVisit);
+
+        patientEntity.addVisit(visitEntity);
+        visitEntity.setPatient(patientEntity);
+
+        VisitEntity save = visitRepository.save(visitEntity);
+        return new VisitDtoResponse(save);
+    }
+
+    @Override
+    public void cancel(Long patientId, Long visitId) {
+        PatientEntity patient = patientRepository.getOrThrow(patientId);
+        VisitEntity visit = visitRepository.getOrThrow(visitId);
+
+        if (!patient.getVisits().contains(visit)) {
+            throw new ForbiddenException("Visit by id " + visitId + " not available for patient by id " + patientId);
+        }
+
+        visitRepository.deleteById(visitId);
+        patient.deleteVisit(visit);
     }
 
     private VisitEntity mapToEntity(VisitDtoRequest dto) {
@@ -55,11 +71,4 @@ public class VisitServiceImpl implements VisitService {
                 dto.getPayment());
     }
 
-    private void addVisitToPatient(VisitEntity visit, Long patientId) {
-        patientRepository.getOrThrow(patientId).getVisits().add(visit);
-    }
-
-    private void deleteVisitFromPatient(Long visitId, Long patientId) {
-        patientRepository.getOrThrow(patientId).getVisits().removeIf(n -> Objects.equals(n.getId(), visitId));
-    }
 }
