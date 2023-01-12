@@ -10,11 +10,11 @@ import static java.util.stream.Collectors.toList;
 @Getter
 public class VisitsDtoResponse {
 
-    private final List<VisitDto> visits;
+    private final List<VisitDtoResponse> visits;
 
     public VisitsDtoResponse(List<VisitEntity> visits) {
         this.visits = visits.stream()
-                .map(VisitDto::new)
+                .map(VisitDtoResponse::new)
                 .collect(toList());
     }
 

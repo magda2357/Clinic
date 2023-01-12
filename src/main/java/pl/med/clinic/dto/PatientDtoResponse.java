@@ -1,7 +1,6 @@
 package pl.med.clinic.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import pl.med.clinic.entity.Gender;
 import pl.med.clinic.entity.PatientEntity;

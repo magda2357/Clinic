@@ -5,14 +5,10 @@ import org.springframework.stereotype.Repository;
 import pl.med.clinic.entity.PatientEntity;
 import pl.med.clinic.exception.EntityNotFoundException;
 
-import java.util.Optional;
-
 @Repository
 public interface PatientRepository extends JpaRepository<PatientEntity, Long> {
 
     default PatientEntity getOrThrow(Long id) {
-        Optional<PatientEntity> optionalPatientEntity = findById(id);
-        return optionalPatientEntity
-                .orElseThrow(() -> new EntityNotFoundException("Entity no: " + id + " not found"));
+        return findById(id).orElseThrow(() -> new EntityNotFoundException("Entity no: " + id + " not found"));
     }
 }
