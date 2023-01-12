@@ -1,6 +1,7 @@
 package pl.med.clinic.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,5 +28,6 @@ public class PatientDtoRequest {
 
     private Gender gender;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDate dateOfBirth;
 }
