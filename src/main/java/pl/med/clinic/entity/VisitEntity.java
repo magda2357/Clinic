@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -18,7 +19,7 @@ public class VisitEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    private LocalDateTime visitDateTime;
+    private Date visitDateTime;
 
     @Enumerated(STRING)
     private Paid paid;
@@ -31,7 +32,7 @@ public class VisitEntity {
     @JoinColumn(name = "patient_id")
     private PatientEntity patient;
 
-    public VisitEntity(LocalDateTime visitDateTime,
+    public VisitEntity(Date visitDateTime,
                        Paid paid,
                        String description,
                        Payment payment) {

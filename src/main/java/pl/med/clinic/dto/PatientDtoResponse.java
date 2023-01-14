@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @Getter
 public class PatientDtoResponse {
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private final Long id;
     private final String firstName;
     private final String lastName;
