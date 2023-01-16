@@ -2683,18 +2683,9 @@ AA;Badania laboratoryjne i inne;Y;Badania patomorfologiczne;Y98;JGPato Grupa 8* 
 36;Zabiegi na naczyniach serca;36.1;Pomosty (by-passy) dla rewaskularyzacji serca;36.19;Pomosty dla rewaskularyzacji serca - inne;;
 36;Zabiegi na naczyniach serca;36.2;Wszczep tętniczy dla rewaskularyzacji serca;36.21;Wszczepienie odgałęzień aorty [odgałęzień aorty wstępującej] do mięśnia sercowego;;
 36;Zabiegi na naczyniach serca;36.2;Wszczep tętniczy dla rewaskularyzacji serca;36.22;Wszczepienie naczyń krwionośnych do mięśnia sercowego;;
-36;Zabiegi na naczyniach serca;36.2;Wszczep tętniczy dla rewaskularyzacji serca;36.23;"Wszczepienie wewnętrznej tętnicy piersiowej do: 
-mięśnia sercowego
-komory
-ściany komory";36.231;Wszczepienie wewnętrznej tętnicy piersiowej do: mięśnia sercowego
-36;Zabiegi na naczyniach serca;36.2;Wszczep tętniczy dla rewaskularyzacji serca;36.23;"Wszczepienie wewnętrznej tętnicy piersiowej do: 
-mięśnia sercowego
-komory
-ściany komory";36.232;Wszczepienie wewnętrznej tętnicy piersiowej do: komory
-36;Zabiegi na naczyniach serca;36.2;Wszczep tętniczy dla rewaskularyzacji serca;36.23;"Wszczepienie wewnętrznej tętnicy piersiowej do: 
-mięśnia sercowego
-komory
-ściany komory";36.233;Wszczepienie wewnętrznej tętnicy piersiowej do: ściany komory
+36;Zabiegi na naczyniach serca;36.2;Wszczep tętniczy dla rewaskularyzacji serca;36.23;Wszczepienie wewnętrznej tętnicy piersiowej do:  mięśnia sercowego komory ściany komory;36.231;Wszczepienie wewnętrznej tętnicy piersiowej do: mięśnia sercowego
+36;Zabiegi na naczyniach serca;36.2;Wszczep tętniczy dla rewaskularyzacji serca;36.23;Wszczepienie wewnętrznej tętnicy piersiowej do:  mięśnia sercowego komory ściany komory;36.232;Wszczepienie wewnętrznej tętnicy piersiowej do: komory
+36;Zabiegi na naczyniach serca;36.2;Wszczep tętniczy dla rewaskularyzacji serca;36.23;Wszczepienie wewnętrznej tętnicy piersiowej do:  mięśnia sercowego komory ściany komory;36.233;Wszczepienie wewnętrznej tętnicy piersiowej do: ściany komory
 36;Zabiegi na naczyniach serca;36.2;Wszczep tętniczy dla rewaskularyzacji serca;36.24 ;Pośrednia rewaskularyzacja serca BNO;;
 36;Zabiegi na naczyniach serca;36.3;Inna rewaskularyzacja serca;36.31;Rewaskularyzacja przezmięśniowa otwarta;;
 36;Zabiegi na naczyniach serca;36.3;Inna rewaskularyzacja serca;36.32;Inna rewaskularyzacja przezmięśniowa;36.321;Przezskórna przezmięśniowa rewaskularyzacja
@@ -6437,8 +6428,7 @@ komory
 87;Diagnostyczne badania radiologiczne;87.4;Inne badania rtg klatki piersiowej;87.41;Komputerowa tomografia (TK) klatki piersiowej;87.410;TK klatki piersiowej bez wzmocnienia kontrastowego
 87;Diagnostyczne badania radiologiczne;87.4;Inne badania rtg klatki piersiowej;87.41;Komputerowa tomografia (TK) klatki piersiowej;87.411;TK klatki piersiowej bez i ze wzmocnieniem kontrastowym
 87;Diagnostyczne badania radiologiczne;87.4;Inne badania rtg klatki piersiowej;87.41;Komputerowa tomografia (TK) klatki piersiowej;87.412;TK klatki piersiowej bez wzmocnienia kontrastowego i co najmniej dwie fazy ze wzmocnieniem kontrastowym
-87;Diagnostyczne badania radiologiczne;87.4;Inne badania rtg klatki piersiowej;87.41;Komputerowa tomografia (TK) klatki piersiowej;87.413;"TK klatki piersiowej bez i ze wzmocnieniem kontrastowym oraz bez lub z doustnym zakontrastowaniem
-przełyku"
+87;Diagnostyczne badania radiologiczne;87.4;Inne badania rtg klatki piersiowej;87.41;Komputerowa tomografia (TK) klatki piersiowej;87.413;TK klatki piersiowej bez i ze wzmocnieniem kontrastowym oraz bez lub z doustnym zakontrastowaniem przełyku
 87;Diagnostyczne badania radiologiczne;87.4;Inne badania rtg klatki piersiowej;87.41;Komputerowa tomografia (TK) klatki piersiowej;87.415;TK tętnic klatki piersiowej (w tym aorta)
 87;Diagnostyczne badania radiologiczne;87.4;Inne badania rtg klatki piersiowej;87.42;Tomografia klatki piersiowej - inne;87.420;Tomografia komputerowa serca
 87;Diagnostyczne badania radiologiczne;87.4;Inne badania rtg klatki piersiowej;87.42;Tomografia klatki piersiowej - inne;87.421;Tomografia komputerowa serca – badanie morfologii i czynności mięśnia sercowego
@@ -6488,8 +6478,7 @@ przełyku"
 87;Diagnostyczne badania radiologiczne;87.9;Badanie rtg męskich narządów rozrodczych;87.99;Badanie RTG męskich narządów płciowych - inne;;
 88;Inne diagnostyczne badania radiologiczne i pokrewne;88.0;Badanie rtg tkanek miękkich brzucha;88.01;Komputerowa tomografia brzucha;88.010;TK jamy brzusznej lub miednicy małej bez wzmocnienia kontrastowego
 88;Inne diagnostyczne badania radiologiczne i pokrewne;88.0;Badanie rtg tkanek miękkich brzucha;88.01;Komputerowa tomografia brzucha;88.011;TK jamy brzusznej lub miednicy małej bez i ze wzmocnieniem kontrastowym
-88;Inne diagnostyczne badania radiologiczne i pokrewne;88.0;Badanie rtg tkanek miękkich brzucha;88.01;Komputerowa tomografia brzucha;88.012;"TK jamy brzusznej lub miednicy małej bez wzmocnienia kontrastowego i co najmniej dwie fazy ze
-wzmocnieniem kontrastowym"
+88;Inne diagnostyczne badania radiologiczne i pokrewne;88.0;Badanie rtg tkanek miękkich brzucha;88.01;Komputerowa tomografia brzucha;88.012;TK jamy brzusznej lub miednicy małej bez wzmocnienia kontrastowego i co najmniej dwie fazy ze wzmocnieniem kontrastowym
 88;Inne diagnostyczne badania radiologiczne i pokrewne;88.0;Badanie rtg tkanek miękkich brzucha;88.01;Komputerowa tomografia brzucha;88.013;TK tętnic jamy brzusznej (w tym aorta)
 88;Inne diagnostyczne badania radiologiczne i pokrewne;88.0;Badanie rtg tkanek miękkich brzucha;88.02;Inna TK jamy brzusznej;;
 88;Inne diagnostyczne badania radiologiczne i pokrewne;88.0;Badanie rtg tkanek miękkich brzucha;88.03;Sinografia ścian jamy brzusznej;;
@@ -6662,14 +6651,12 @@ wzmocnieniem kontrastowym"
 88;Inne diagnostyczne badania radiologiczne i pokrewne;88.9;Inne metody obrazowania diagnostycznego;88.92;Rezonans magnetyczny klatki piersiowej i mięśnia sercowego;88.925;Rezonans magnetyczny serca – badanie czynnościowe i morfologiczne bez wzmocnienia kontrastowego
 88;Inne diagnostyczne badania radiologiczne i pokrewne;88.9;Inne metody obrazowania diagnostycznego;88.92;Rezonans magnetyczny klatki piersiowej i mięśnia sercowego;88.926;Rezonans magnetyczny serca – badanie czynnościowe i morfologiczne bez i ze wzmocnieniem kontrastowym
 88;Inne diagnostyczne badania radiologiczne i pokrewne;88.9;Inne metody obrazowania diagnostycznego;88.93;Rezonans magnetyczny kanału kręgowego;88.931;RM kręgosłupa lub kanału kręgowego na poziomie odcinka szyjnego bez wzmocnienia kontrastowego
-88;Inne diagnostyczne badania radiologiczne i pokrewne;88.9;Inne metody obrazowania diagnostycznego;88.93;Rezonans magnetyczny kanału kręgowego;88.932;"RM kręgosłupa lub kanału kręgowego na poziomie odcinka lędźwiowego (lędźwiowo-krzyżowego) bez
-wzmocnienia kontrastowego"
+88;Inne diagnostyczne badania radiologiczne i pokrewne;88.9;Inne metody obrazowania diagnostycznego;88.93;Rezonans magnetyczny kanału kręgowego;88.932;RM kręgosłupa lub kanału kręgowego na poziomie odcinka lędźwiowego (lędźwiowo-krzyżowego) bez wzmocnienia kontrastowego
 88;Inne diagnostyczne badania radiologiczne i pokrewne;88.9;Inne metody obrazowania diagnostycznego;88.93;Rezonans magnetyczny kanału kręgowego;88.933;RM kręgosłupa lub kanału kręgowego na poziomie odcinka piersiowego bez wzmocnienia kontrastowego
 88;Inne diagnostyczne badania radiologiczne i pokrewne;88.9;Inne metody obrazowania diagnostycznego;88.93;Rezonans magnetyczny kanału kręgowego;88.934;RM kanału rdzeniowego – rdzeń kręgowy
 88;Inne diagnostyczne badania radiologiczne i pokrewne;88.9;Inne metody obrazowania diagnostycznego;88.93;Rezonans magnetyczny kanału kręgowego;88.935;RM kanału rdzeniowego – kręgosłup
 88;Inne diagnostyczne badania radiologiczne i pokrewne;88.9;Inne metody obrazowania diagnostycznego;88.93;Rezonans magnetyczny kanału kręgowego;88.936;RM kręgosłupa lub kanału kręgowego na poziomie odcinka szyjnego bez i ze wzmocnieniem kontrastowym
-88;Inne diagnostyczne badania radiologiczne i pokrewne;88.9;Inne metody obrazowania diagnostycznego;88.93;Rezonans magnetyczny kanału kręgowego;88.937;"RM kręgosłupa lub kanału kręgowego na poziomie odcinka lędźwiowego (lędźwiowo-krzyżowego) bez
-i ze wzmocnieniem kontrastowym"
+88;Inne diagnostyczne badania radiologiczne i pokrewne;88.9;Inne metody obrazowania diagnostycznego;88.93;Rezonans magnetyczny kanału kręgowego;88.937;RM kręgosłupa lub kanału kręgowego na poziomie odcinka lędźwiowego (lędźwiowo-krzyżowego) bez i ze wzmocnieniem kontrastowym
 88;Inne diagnostyczne badania radiologiczne i pokrewne;88.9;Inne metody obrazowania diagnostycznego;88.93;Rezonans magnetyczny kanału kręgowego;88.938;RM kręgosłupa lub kanału kręgowego na poziomie odcinka piersiowego bez i ze wzmocnieniem kontrastowym
 88;Inne diagnostyczne badania radiologiczne i pokrewne;88.9;Inne metody obrazowania diagnostycznego;88.94;Rezonans magnetyczny układu mięśniowo-szkieletowego;;
 88;Inne diagnostyczne badania radiologiczne i pokrewne;88.9;Inne metody obrazowania diagnostycznego;88.95;Rezonans magnetyczny miednicy, pęcherza, prostaty;;

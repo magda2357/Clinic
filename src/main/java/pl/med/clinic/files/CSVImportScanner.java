@@ -16,7 +16,6 @@ public class CSVImportScanner {
     }
 
     public static void readFile(File fileIn, File fileOut) {
-
         try (Scanner sc = new Scanner(fileIn)) {
 
             try (PrintWriter out = new PrintWriter(fileOut)) {
