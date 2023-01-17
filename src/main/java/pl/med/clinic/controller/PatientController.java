@@ -1,12 +1,16 @@
 package pl.med.clinic.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.med.clinic.dto.PatientDtoRequest;
 import pl.med.clinic.dto.PatientDtoResponse;
 import pl.med.clinic.service.PatientService;
 
+import javax.validation.Valid;
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.ACCEPTED;
 
 @RestController
 @RequestMapping("/patient")
@@ -26,17 +30,19 @@ public class PatientController {
     }
 
     @PostMapping
-    public void add(@RequestBody PatientDtoRequest newPatient) {
-        patientService.savePatient(newPatient);
+    public PatientDtoResponse add(@Valid @RequestBody PatientDtoRequest newPatient) {
+        return patientService.savePatient(newPatient);
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable Long id, @RequestBody PatientDtoRequest updatedPatient) {
-        patientService.updatePatient(id, updatedPatient);
+    public PatientDtoResponse update(@PathVariable Long id, @RequestBody PatientDtoRequest updatedPatient) {
+        return patientService.updatePatient(id, updatedPatient);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(value = ACCEPTED, reason = "Patient has been deleted")
     public void delete(@PathVariable Long id) {
         patientService.deletePatientById(id);
     }
+
 }
