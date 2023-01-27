@@ -1,30 +1,30 @@
-package pl.med.clinic.files;
+package pl.med.clinic.library;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class CSVImportScanner {
+import static pl.med.clinic.library.ConvertExcelToSql.*;
 
-    static File csvFileIn = new File("src/main/resources/icd-9_pl_cm_v_5.67.csv");
-    static File SQLFileOut = new File("src/main/resources/insertProcedures.sql");
+public class CSVToSQLConverter {
 
-    public static void main(String[] args) {
-        CSVImportScanner.readFile(csvFileIn, SQLFileOut);
-        //        CSVImport.readCSV();
-    }
+    public static void convertCsvToSql(int maxRowWidth, String separator) {
 
-    public static void readFile(File fileIn, File fileOut) {
-        try (Scanner sc = new Scanner(fileIn)) {
+        File csvFileIn = new File(STR_CSV_FILE);
+        File sqlFileOut = new File(STR_SQL_FILE);
+int i=0;
+        try (Scanner sc = new Scanner(csvFileIn)) {
 
-            try (PrintWriter out = new PrintWriter(fileOut)) {
+            try (PrintWriter out = new PrintWriter(sqlFileOut)) {
                 while (sc.hasNextLine()) {
                     String line = sc.nextLine();
-                    if (line.contains("'")) {
-                        line = line.replace("'", "''");
-                    }
-                    String[] chunks = line.split(";", 8);
+//                    if (line.contains("'")) {
+//                        line = line.replace("'", "''");
+//                    }
+                    i++;
+                    System.out.println(i);
+                    String[] chunks = line.split(separator, maxRowWidth);
 
                     String SQLInsert;
                     SQLInsert = "INSERT INTO procedure (" +
