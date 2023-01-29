@@ -103,15 +103,15 @@ public class ExcelToCSVConverter {
                 buffer = new StringBuilder(field.replace("\"", "\\\"\\\""));
                 buffer.insert(0, "\"");
                 buffer.append("\"");
+            } else if (field.contains("'")) {
+                buffer = new StringBuilder(field.replace("'", "''"));
+            } else if (field.contains("\n")) {
+                buffer = new StringBuilder(field.replace("\n", ""));
             } else {
                 buffer = new StringBuilder(field);
-                if ((buffer.indexOf(DEFAULT_SEPARATOR)) > -1 /*|| (buffer.indexOf("\n")) > -1*/) {
+                if ((buffer.indexOf(DEFAULT_SEPARATOR)) > -1) {
                     buffer.insert(0, "\"");
                     buffer.append("\"");
-                }
-                if (buffer.indexOf("\n") > -1) {
-                    buffer.replace(buffer.indexOf("\n"), buffer.indexOf("\n")+1,"");
-//                    buffer.append("\"");
                 }
             }
             return buffer.toString().trim();
@@ -120,10 +120,11 @@ public class ExcelToCSVConverter {
                 field = field.replaceAll(DEFAULT_SEPARATOR, ("\\\\" + DEFAULT_SEPARATOR));
             }
             if (field.contains("\n")) {
-                field = field.replace("\n", "\\\\\n");
+                field = field.replace("\n", "");
             }
             return field;
         }
+
     }
 
     private void convertToCSV(Workbook workbook, int sheetNum, int maxRowWidth, int firstRow) {
@@ -153,6 +154,7 @@ public class ExcelToCSVConverter {
                         } else {
                             csvLine.add(formatter.formatCellValue(cell, evaluator));
                         }
+
                     }
                 }
                 this.csvData.add(csvLine);

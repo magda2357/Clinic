@@ -13,17 +13,12 @@ public class CSVToSQLConverter {
 
         File csvFileIn = new File(STR_CSV_FILE);
         File sqlFileOut = new File(STR_SQL_FILE);
-int i=0;
+
         try (Scanner sc = new Scanner(csvFileIn)) {
 
             try (PrintWriter out = new PrintWriter(sqlFileOut)) {
                 while (sc.hasNextLine()) {
                     String line = sc.nextLine();
-//                    if (line.contains("'")) {
-//                        line = line.replace("'", "''");
-//                    }
-                    i++;
-                    System.out.println(i);
                     String[] chunks = line.split(separator, maxRowWidth);
 
                     String SQLInsert;
