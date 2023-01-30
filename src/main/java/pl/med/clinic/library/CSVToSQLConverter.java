@@ -1,9 +1,10 @@
 package pl.med.clinic.library;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.Scanner;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.lang3.StringEscapeUtils;
+
+import java.io.*;
 
 import static pl.med.clinic.library.ConvertExcelToSql.*;
 
@@ -14,14 +15,17 @@ public class CSVToSQLConverter {
         File csvFileIn = new File(STR_CSV_FILE);
         File sqlFileOut = new File(STR_SQL_FILE);
 
-        try (Scanner sc = new Scanner(csvFileIn)) {
+        try (Reader in = new FileReader(csvFileIn)) {
+            Iterable<CSVRecord> records = CSVFormat.newFormat(DEFAULT_SEPARATOR.charAt(0)).parse(in);
 
             try (PrintWriter out = new PrintWriter(sqlFileOut)) {
-                while (sc.hasNextLine()) {
-                    String line = sc.nextLine();
-                    String[] chunks = line.split(separator, maxRowWidth);
-
+                for (CSVRecord record : records) {
                     String SQLInsert;
+                    String recordsSQLInsert = "";
+                    for (int i = 0; i < maxRowWidth - 1; i++) {
+                        recordsSQLInsert = recordsSQLInsert + record.get(i) + "', '";
+                    }
+                    recordsSQLInsert = recordsSQLInsert + record.get(maxRowWidth - 1) + "'";
                     SQLInsert = "INSERT INTO procedure (" +
                             "chapter_id, " +
                             "chapter, " +
@@ -32,22 +36,17 @@ public class CSVToSQLConverter {
                             "detailed_category_id, " +
                             "detailed_category) " +
                             "VALUES ('" +
-                            chunks[0] + "', '" +
-                            chunks[1] + "', '" +
-                            chunks[2] + "', '" +
-                            chunks[3] + "', '" +
-                            chunks[4] + "', '" +
-                            chunks[5] + "', '" +
-                            chunks[6] + "', '" +
-                            chunks[7] + "');";
+                            recordsSQLInsert +
+                            ");";
                     out.println(SQLInsert);
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-
             System.out.println("File created");
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

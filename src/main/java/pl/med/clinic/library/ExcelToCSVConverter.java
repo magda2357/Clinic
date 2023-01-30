@@ -10,23 +10,22 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 
-import static pl.med.clinic.library.ConvertExcelToSql.*;
+import static pl.med.clinic.library.ConvertExcelToSql.DEFAULT_SEPARATOR;
 
 public class ExcelToCSVConverter {
 
     private static final String CSV_FILE_EXTENSION = ".csv";
     private ArrayList<ArrayList<String>> csvData;
 
-    public static void runExcelToCSVConversion(String strSource, String strDestination, String separator,
-                                               int formattingConvention, int maxRowWidth,
-                                               int sheetNum, int firstRow) {
+    public static void runExcelToCSVConversion(String strSource, String strDestination,
+                                               int maxRowWidth, int sheetNum, int firstRow) {
         long startTime = System.currentTimeMillis();
         boolean converted = true;
 
         try {
             ExcelToCSVConverter converter = new ExcelToCSVConverter();
             converter.convertExcelToCSV(strSource, strDestination,
-                    formattingConvention, maxRowWidth, sheetNum, firstRow);
+                    maxRowWidth, sheetNum, firstRow);
         } catch (Exception e) {
             System.out.println("Unexpected exception");
             e.printStackTrace();
@@ -39,7 +38,7 @@ public class ExcelToCSVConverter {
     }
 
     private void convertExcelToCSV(String strSource, String strDestination,
-                                   int formattingConvention, int maxRowWidth, int sheetNum, int firstRow)
+                                   int maxRowWidth, int sheetNum, int firstRow)
             throws IOException, IllegalArgumentException {
 
         File sourceFile = new File(strSource);
@@ -58,13 +57,6 @@ public class ExcelToCSVConverter {
                     "The destination " + destination + " for the CSV file is not a directory/folder.");
         }
 
-        if (formattingConvention != EXCEL_STYLE_ESCAPING && formattingConvention != UNIX_STYLE_ESCAPING) {
-            throw new IllegalArgumentException("The value passed to the "
-                    + "formattingConvention parameter is out of range: " + formattingConvention + ", expecting one of "
-                    + EXCEL_STYLE_ESCAPING + " or "
-                    + UNIX_STYLE_ESCAPING);
-        }
-
         FileInputStream fis = null;
         Workbook workbook = null;
 
@@ -79,7 +71,7 @@ public class ExcelToCSVConverter {
             destinationFilename = destinationFilename.substring(0, destinationFilename.lastIndexOf('.'))
                     + CSV_FILE_EXTENSION;
 
-            saveCSVFile(new File(destination, destinationFilename), formattingConvention, maxRowWidth);
+            saveCSVFile(new File(destination, destinationFilename), maxRowWidth);
 
         } catch (Exception e) {
             System.out.println("Unexpected exception");
@@ -94,37 +86,27 @@ public class ExcelToCSVConverter {
         }
     }
 
-    private String escapeEmbeddedCharacters(String field, int formattingConvention) {
+    private String escapeEmbeddedCharacters(String field) {
 
         StringBuilder buffer;
-
-        if (EXCEL_STYLE_ESCAPING == formattingConvention) {
-            if (field.contains("\"")) {
-                buffer = new StringBuilder(field.replace("\"", "\\\"\\\""));
+        if (field.contains("\n")) {
+            field = field.replace("\n", "");
+        }
+        if (field.contains("'")) {
+            field = field.replace("'", "''");
+        }
+        if (field.contains("\"")) {
+            buffer = new StringBuilder(field.replace("\"", "\\\"\\\""));
+            buffer.insert(0, "\"");
+            buffer.append("\"");
+        } else {
+            buffer = new StringBuilder(field);
+            if (buffer.indexOf(DEFAULT_SEPARATOR) > -1) {
                 buffer.insert(0, "\"");
                 buffer.append("\"");
-            } else if (field.contains("'")) {
-                buffer = new StringBuilder(field.replace("'", "''"));
-            } else if (field.contains("\n")) {
-                buffer = new StringBuilder(field.replace("\n", ""));
-            } else {
-                buffer = new StringBuilder(field);
-                if ((buffer.indexOf(DEFAULT_SEPARATOR)) > -1) {
-                    buffer.insert(0, "\"");
-                    buffer.append("\"");
-                }
             }
-            return buffer.toString().trim();
-        } else {
-            if (field.contains(DEFAULT_SEPARATOR)) {
-                field = field.replaceAll(DEFAULT_SEPARATOR, ("\\\\" + DEFAULT_SEPARATOR));
-            }
-            if (field.contains("\n")) {
-                field = field.replace("\n", "");
-            }
-            return field;
         }
-
+        return buffer.toString().trim();
     }
 
     private void convertToCSV(Workbook workbook, int sheetNum, int maxRowWidth, int firstRow) {
@@ -162,7 +144,7 @@ public class ExcelToCSVConverter {
         }
     }
 
-    private void saveCSVFile(File file, int formattingConvention, int maxRowWidth) throws IOException {
+    private void saveCSVFile(File file, int maxRowWidth) throws IOException {
         ArrayList<String> line;
         StringBuilder buffer;
         String csvLineElement;
@@ -179,7 +161,7 @@ public class ExcelToCSVConverter {
                     if (line.size() > j) {
                         csvLineElement = line.get(j);
                         if (csvLineElement != null) {
-                            buffer.append(escapeEmbeddedCharacters(csvLineElement, formattingConvention));
+                            buffer.append(escapeEmbeddedCharacters(csvLineElement));
                         }
                     }
                     if (j < (maxRowWidth - 1)) {
