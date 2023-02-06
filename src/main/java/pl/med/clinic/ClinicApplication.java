@@ -7,7 +7,7 @@ import java.io.IOException;
 
 @SpringBootApplication
 public class ClinicApplication {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         SpringApplication.run(ClinicApplication.class, args);
 
     }

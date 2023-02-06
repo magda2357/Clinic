@@ -3,8 +3,8 @@ package pl.med.clinic.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-//@Getter
-//@AllArgsConstructor
+@Getter
+@AllArgsConstructor
 public class ProcedureDtoRequest {
 
     private String chapterId;

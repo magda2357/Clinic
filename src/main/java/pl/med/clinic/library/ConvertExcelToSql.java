@@ -1,7 +1,5 @@
 package pl.med.clinic.library;
 
-import java.io.IOException;
-
 import static pl.med.clinic.library.ExcelToCSVConverter.runExcelToCSVConversion;
 
 public class ConvertExcelToSql {
