@@ -15,7 +15,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name = "procedure")
 @NoArgsConstructor
 @Getter
-@Setter
 public class Procedure {
 
     @Id

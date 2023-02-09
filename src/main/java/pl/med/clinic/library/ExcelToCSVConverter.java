@@ -1,6 +1,8 @@
 package pl.med.clinic.library;
 
 import org.apache.poi.ss.usermodel.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,13 +11,15 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.List;
 
 import static pl.med.clinic.library.ConvertExcelToSql.DEFAULT_SEPARATOR;
 
 public class ExcelToCSVConverter {
 
     private static final String CSV_FILE_EXTENSION = ".csv";
-    private ArrayList<ArrayList<String>> csvData;
+    private List<ArrayList<String>> csvData;
+    private static final Logger logger = LoggerFactory.getLogger(ExcelToCSVConverter.class);
 
     public static void runExcelToCSVConversion(String strSource, String strDestination,
                                                int maxRowWidth, int sheetNum, int firstRow) {
@@ -27,8 +31,7 @@ public class ExcelToCSVConverter {
             converter.convertExcelToCSV(strSource, strDestination,
                     maxRowWidth, sheetNum, firstRow);
         } catch (Exception e) {
-            System.out.println("Unexpected exception");
-            e.printStackTrace();
+            logger.error("Unexpected exception! ", e);
             converted = false;
         }
 
@@ -62,7 +65,7 @@ public class ExcelToCSVConverter {
 
         try {
             fis = new FileInputStream(sourceFile);
-            System.out.println("Opening workbook [" + sourceFile.getName() + "]");
+            logger.info("Opening workbook [" + sourceFile.getName() + "]");
             workbook = WorkbookFactory.create(fis);
 
             convertToCSV(workbook, sheetNum, maxRowWidth, firstRow);
