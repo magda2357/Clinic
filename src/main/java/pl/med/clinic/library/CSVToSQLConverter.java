@@ -45,14 +45,14 @@ public class CSVToSQLConverter {
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                logger.error("File " + sqlFileOut + " was not found!" + e);
+                logger.error("File {} was not found! {}", sqlFileOut, e);
             }
             logger.info("SQL file created.");
         } catch (FileNotFoundException e) {
-            logger.error("File " + csvFileIn + " was not found!" + e);
+            logger.error("File {} was not found! {}", csvFileIn, e);
         } catch (IOException e) {
-            logger.error("File processing error! " + e);
-            logger.debug("File not processed: " + STR_CSV_FILE);
+            logger.error("File processing error!", e);
+            logger.debug("File not processed: {}", STR_CSV_FILE);
         }
     }
 }

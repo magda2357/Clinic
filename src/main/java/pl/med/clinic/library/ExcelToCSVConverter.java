@@ -31,7 +31,7 @@ public class ExcelToCSVConverter {
             converter.convertExcelToCSV(strSource, strDestination,
                     maxRowWidth, sheetNum, firstRow);
         } catch (Exception e) {
-            logger.error("Unexpected exception! ", e);
+            logger.error("Unexpected exception!", e);
             converted = false;
         }
 
@@ -65,7 +65,7 @@ public class ExcelToCSVConverter {
 
         try {
             fis = new FileInputStream(sourceFile);
-            logger.info("Opening workbook [" + sourceFile.getName() + "]");
+            logger.info("Opening workbook [{}]", sourceFile.getName());
             workbook = WorkbookFactory.create(fis);
 
             convertToCSV(workbook, sheetNum, maxRowWidth, firstRow);
