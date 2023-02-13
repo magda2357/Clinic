@@ -1,5 +1,6 @@
 package pl.med.clinic.library;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
@@ -9,9 +10,8 @@ import java.io.*;
 
 import static pl.med.clinic.library.ConvertExcelToSql.*;
 
+@Slf4j
 public class CSVToSQLConverter {
-
-    private static final Logger logger = LoggerFactory.getLogger(ExcelToCSVConverter.class);
 
     public static void convertCsvToSql(int maxRowWidth, String separator) {
 
@@ -45,14 +45,14 @@ public class CSVToSQLConverter {
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                logger.error("File {} was not found! {}", sqlFileOut, e);
+                log.error("File {} was not found! {}", sqlFileOut, e);
             }
-            logger.info("SQL file created.");
+            log.info("SQL file created.");
         } catch (FileNotFoundException e) {
-            logger.error("File {} was not found! {}", csvFileIn, e);
+            log.error("File {} was not found! {}", csvFileIn, e);
         } catch (IOException e) {
-            logger.error("File processing error!", e);
-            logger.debug("File not processed: {}", STR_CSV_FILE);
+            log.error("File processing error!", e);
+            log.debug("File not processed: {}", STR_CSV_FILE);
         }
     }
 }

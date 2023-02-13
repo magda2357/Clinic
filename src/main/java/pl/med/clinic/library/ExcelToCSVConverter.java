@@ -1,5 +1,6 @@
 package pl.med.clinic.library;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,11 +16,11 @@ import java.util.List;
 
 import static pl.med.clinic.library.ConvertExcelToSql.DEFAULT_SEPARATOR;
 
+@Slf4j
 public class ExcelToCSVConverter {
 
     private static final String CSV_FILE_EXTENSION = ".csv";
     private List<ArrayList<String>> csvData;
-    private static final Logger logger = LoggerFactory.getLogger(ExcelToCSVConverter.class);
 
     public static void runExcelToCSVConversion(String strSource, String strDestination,
                                                int maxRowWidth, int sheetNum, int firstRow) {
@@ -31,7 +32,7 @@ public class ExcelToCSVConverter {
             converter.convertExcelToCSV(strSource, strDestination,
                     maxRowWidth, sheetNum, firstRow);
         } catch (Exception e) {
-            logger.error("Unexpected exception!", e);
+            log.error("Unexpected exception!", e);
             converted = false;
         }
 
@@ -65,7 +66,7 @@ public class ExcelToCSVConverter {
 
         try {
             fis = new FileInputStream(sourceFile);
-            logger.info("Opening workbook [{}]", sourceFile.getName());
+            log.info("Opening workbook [{}]", sourceFile.getName());
             workbook = WorkbookFactory.create(fis);
 
             convertToCSV(workbook, sheetNum, maxRowWidth, firstRow);
