@@ -1,14 +1,19 @@
 package pl.med.clinic.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.med.clinic.dto.PatientDtoRequest;
 import pl.med.clinic.dto.PatientDtoResponse;
+import pl.med.clinic.controller.SimplePageForPagingAndSorting;
 import pl.med.clinic.entity.PatientEntity;
 import pl.med.clinic.repository.PatientRepository;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 import static org.springframework.beans.BeanUtils.copyProperties;
@@ -16,6 +21,7 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class PatientServiceImpl implements PatientService {
 
     private final PatientRepository patientRepository;
@@ -26,10 +32,13 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<PatientDtoResponse> getAll() {
-        return patientRepository.findAll().stream()
+    public SimplePageForPagingAndSorting<PatientDtoResponse> getAllPaged(Integer pageNo, Integer pageSize, String sortBy) {
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+        Page<PatientEntity> pagedResult = patientRepository.findAll(paging);
+        return new SimplePageForPagingAndSorting<>(pagedResult.getContent().stream()
                 .map(PatientDtoResponse::new)
-                .collect(toList());
+                .collect(toList()),
+                pagedResult.getTotalElements(), paging);
     }
 
     @Override

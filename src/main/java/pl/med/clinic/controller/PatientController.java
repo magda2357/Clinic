@@ -1,14 +1,13 @@
 package pl.med.clinic.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.med.clinic.dto.PatientDtoRequest;
 import pl.med.clinic.dto.PatientDtoResponse;
 import pl.med.clinic.service.PatientService;
 
 import javax.validation.Valid;
-import java.util.List;
 
 import static org.springframework.http.HttpStatus.ACCEPTED;
 
@@ -25,8 +24,12 @@ public class PatientController {
     }
 
     @GetMapping
-    public List<PatientDtoResponse> getAll() {
-        return patientService.getAll();
+    public ResponseEntity<SimplePageForPagingAndSorting<PatientDtoResponse>> getAllPaged(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "5") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy
+    ) {
+        return ResponseEntity.ok(patientService.getAllPaged(pageNo, pageSize, sortBy));
     }
 
     @PostMapping
