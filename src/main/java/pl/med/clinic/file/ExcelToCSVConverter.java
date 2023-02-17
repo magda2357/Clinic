@@ -1,9 +1,7 @@
-package pl.med.clinic.library;
+package pl.med.clinic.file;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,7 +12,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-import static pl.med.clinic.library.ConvertExcelToSql.DEFAULT_SEPARATOR;
+import static pl.med.clinic.file.ConvertExcelToSql.DEFAULT_SEPARATOR;
 
 @Slf4j
 public class ExcelToCSVConverter {
@@ -113,7 +111,7 @@ public class ExcelToCSVConverter {
         return buffer.toString().trim();
     }
 
-    private void convertToCSV(Workbook workbook, int sheetNum, int maxRowWidth, int firstRow) {
+    private void convertToCSV(Workbook workbook, int sheetNum, int maxRowWidth, int firstRow) throws Exception {
 
         FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
         DataFormatter formatter = new DataFormatter(true);
@@ -123,6 +121,10 @@ public class ExcelToCSVConverter {
         System.out.println("Converting files contents to CSV format.");
 
         Sheet sheet = workbook.getSheetAt(sheetNum);
+        if(!sheet.getSheetName().equals("ICD-9_PL")) {
+            throw new Exception("Incorrect procedure file.");
+        }
+
         if (sheet.getPhysicalNumberOfRows() > 0) {
             int lastRowNum = sheet.getLastRowNum();
             for (int j = firstRow; j <= lastRowNum; j++) {

@@ -1,4 +1,4 @@
-package pl.med.clinic.library;
+package pl.med.clinic.file;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
@@ -6,7 +6,7 @@ import org.apache.commons.csv.CSVRecord;
 
 import java.io.*;
 
-import static pl.med.clinic.library.ConvertExcelToSql.*;
+import static pl.med.clinic.file.ConvertExcelToSql.*;
 
 @Slf4j
 public class CSVToSQLConverter {
